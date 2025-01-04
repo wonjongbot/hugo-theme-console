@@ -2,9 +2,30 @@
 
 <h1>About</h1>
 
-<p>
-Console is a minimal, responsive and light theme for Hugo inspired by Linux console.  <a href="about/">(more)</a>
-</p>
+<div style="display: flex; width: 100%; box-sizing: border-box;">
+    <!-- Left box for the image -->
+    <div style="flex: 1; display: flex; justify-content: left; align-items: center;">
+      <img src="https://wonjongbot.com/images/PeterLee.jpeg" style="width: 150px; margin-right: 10px">
+    </div>
+    
+    <!-- Right box for the text -->
+    <div style="flex: 4; justify-content: left; align-items: center;">
+      <p style="margin: 0; text-align: left;">
+        Welcome to my website! My name is Peter Lee (이원종: Wonjong Lee).
+        <ul>
+            <li> I am a rising junior at <span style="
+                                        background: linear-gradient(to left, #0455A4,#0455A4, #FF5F05); 
+                                        -webkit-background-clip: text; 
+                                        -webkit-text-fill-color: transparent;
+                                        ">
+                University of Illinois</span>, majoring in Computer Engineering.<br/>
+            <li> My focus is computer architecture and design verification. <!--<a href="about/">(more)</a>--> <br/>
+            <li> Currently, I am serving in the Korean army as part of my mandatory service.
+        </ul>
+      </p>
+    </div>
+</div>
+
 <br/>
 
 <h1>Latest posts</h1>
@@ -23,10 +44,10 @@ Console is a minimal, responsive and light theme for Hugo inspired by Linux cons
 {{ end }}
 </div>
 
-<h1>Latest photos</h1>
+<h1>Latest projects</h1>
 
 <div class="image-grid">
-{{ with .Site.GetPage "/photos" }}
+{{ with .Site.GetPage "/projects" }}
     {{ range first 3 (sort .Data.Pages "Date" "desc")}}
         <a href="{{ .Permalink }}" title="{{ .Title }}">
         {{ $image := .Page.Resources.GetMatch .Params.image }}
