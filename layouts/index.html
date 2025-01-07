@@ -46,18 +46,71 @@
 
 <h1>Latest projects</h1>
 
-<div class="image-grid">
-{{ with .Site.GetPage "/projects" }}
-    {{ range first 3 (sort .Data.Pages "Date" "desc")}}
-        <a href="{{ .Permalink }}" title="{{ .Title }}">
-        {{ $image := .Page.Resources.GetMatch .Params.image }}
-        {{ with $image }}
-            {{ $thumb := .Resize "400x" }}
-            <img src="{{ $thumb.RelPermalink }}" alt="{{ .Title }}" class="img-responsive">
-        {{end}}
-        </a>
+<div class="posts-list">
+  {{ with .Site.GetPage "/projects" }}
+    {{ range first 3 (sort .Data.Pages "Date" "desc") }}
+      <div class="post">
+        <p>
+          <div class="date">{{ .PublishDate.Format "Jan. 2, 2006" }}</div>
+          <h1>
+            <a href="{{ .Permalink }}" 
+               title="{{ .Title }}" 
+               class="project-title" 
+               data-img="{{ with .Page.Resources.GetMatch .Params.image }}{{ .RelPermalink }}{{ end }}">
+              {{ .Title }}
+            </a>
+          </h1>
+          {{ .Summary }}
+        </p>
+      </div>
     {{ end }}
-{{ end }}
+  {{ end }}
 </div>
 
+<!-- Image Preview Element -->
+<div id="image-preview" style="display: none; position: absolute; z-index: 9999; pointer-events: none;">
+  <img id="preview-image" src="" style="width: 150px; border: 1px solid #ddd; background-color: #fff;" />
+</div>
+
+
+<!-- Image Preview Element -->
+<div id="image-preview" style="display: none; position: absolute; z-index: 9999; pointer-events: none;">
+  <img id="preview-image" src="" style="width: 150px; border: 1px solid #ddd; background-color: #fff;" />
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const titles = document.querySelectorAll('.project-title');
+      const previewContainer = document.getElementById('image-preview');
+      const previewImage = document.getElementById('preview-image');
+    
+      titles.forEach(title => {
+        const imgUrl = title.getAttribute('data-img');
+        if (!imgUrl) return; // Skip if there's no image URL
+    
+        // Mouse enters the title
+        title.addEventListener('mouseenter', () => {
+          previewImage.src = imgUrl;
+          previewContainer.style.display = 'block';
+        });
+    
+        // Mouse moves over the title
+        title.addEventListener('mousemove', e => {
+          previewContainer.style.top = e.pageY + 10 + 'px'; // Slight offset from the mouse
+          previewContainer.style.left = e.pageX + 10 + 'px';
+        });
+    
+        // Mouse leaves the title
+        title.addEventListener('mouseleave', () => {
+          previewContainer.style.display = 'none';
+          previewImage.src = '';
+        });
+      });
+    });
+    </script>
+    
+    
+
 {{ end }}
+
