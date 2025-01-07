@@ -312,3 +312,37 @@ figure {
         padding-top: 5px;
     }
 }
+
+/*Edited by Peter Lee*/
+
+.projects-list {
+    margin: 20px 0;
+}
+  
+.project-item {
+    margin-bottom: 20px;
+}
+  
+.project-title a {
+    color: #0455A4;
+    text-decoration: none;
+    font-weight: bold;
+}
+  
+#image-preview {
+    width: 150px; /* The width of the image box */
+    border: 1px solid #ddd;
+    background-color: #fff;
+    z-index: 9999; /* Ensures it floats above everything */
+    display: none; /* Hidden by default */
+}
+  
+#image-preview img {
+    width: 100%; /* Ensures the image fits the box */
+    height: auto;
+}
+
+.image-item img {
+    object-fit: cover; /* Ensures images fill the box while maintaining aspect ratio */
+    display: block;
+}
