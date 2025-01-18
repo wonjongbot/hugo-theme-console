@@ -346,3 +346,49 @@ figure {
     object-fit: cover; /* Ensures images fill the box while maintaining aspect ratio */
     display: block;
 }
+
+#about-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#profile-picture-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+#profile-picture {
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+}
+
+#intro-text-container {
+    flex: 2.5;
+    text-align: left;
+    margin: 10px;
+}
+
+#intro-text {
+    margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    #about-container {
+        flex-direction: column;
+    }
+
+    #profile-picture-container, #intro-text-container {
+        width: 100%;
+        text-align: left;
+    }
+
+    #intro-text {
+        text-align: center;
+    }
+}

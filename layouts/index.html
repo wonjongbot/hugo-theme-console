@@ -2,19 +2,19 @@
 
 <h1>About</h1>
 
-<div style="display: flex; width: 100%; box-sizing: border-box;">
+<div id="about-container">
     <!-- Left box for the image -->
-    <div style="flex: 1; display: flex; justify-content: left; align-items: center;">
-      <img src="https://wonjongbot.com/images/PeterLee.jpeg" style="width: 150px; margin-right: 10px">
+    <div id="profile-picture-container">
+        <img src="https://github.com/wonjongbot/wonjongbot_website_25/blob/master/content/about/profile_pic.jpg?raw=true" id="profile-picture">
     </div>
     
     <!-- Right box for the text -->
-    <div style="flex: 4; justify-content: left; align-items: center;">
-      <p style="margin: 0; text-align: left;">
+    <div id="intro-text-container">
+      <p id="intro-text">
         Welcome to my website! My name is Peter Lee (이원종: Wonjong Lee).
         <ul>
             <li> I am a rising junior at <span style="
-                                        background: linear-gradient(to left, #0455A4,#0455A4, #FF5F05); 
+                                        background: linear-gradient(to left, #0455A4,#0455A4,#FF5F05); 
                                         -webkit-background-clip: text; 
                                         -webkit-text-fill-color: transparent;
                                         ">
@@ -72,13 +72,6 @@
   <img id="preview-image" src="" style="width: 150px; border: 1px solid #ddd; background-color: #fff;" />
 </div>
 
-
-<!-- Image Preview Element -->
-<div id="image-preview" style="display: none; position: absolute; z-index: 9999; pointer-events: none;">
-  <img id="preview-image" src="" style="width: 150px; border: 1px solid #ddd; background-color: #fff;" />
-</div>
-
-
 <script>
     document.addEventListener('DOMContentLoaded', () => {
       const titles = document.querySelectorAll('.project-title');
@@ -108,9 +101,6 @@
         });
       });
     });
-    </script>
-    
-    
+</script>
 
 {{ end }}
-
