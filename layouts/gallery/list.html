@@ -18,6 +18,20 @@
                     <h1 class="image-title">
                         <a href="{{ .Permalink }}">{{ .Title }}</a>
                     </h1>
+                    <div class="links">
+                        {{ with .Params.github }}
+                        <div class="github-link">
+                            <a href="{{ . }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        </div>
+                        {{ end }}
+                        
+                        {{ with .Params.demo }}
+                        |
+                        <div class="demo-link">
+                            <a href="{{ . }}" target="_blank" rel="noopener noreferrer">Demo</a>
+                        </div>
+                        {{ end }}
+                    </div>
                     {{ .Summary }}
                     <!-- <p class="image-summary">{{ .Summary }}</p> -->
                 </div>

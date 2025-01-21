@@ -60,6 +60,22 @@
               {{ .Title }}
             </a>
           </h1>
+          <div class="links">
+            <!-- links -->
+            {{ with .Params.github }}
+            <div class="github-link">
+                <a href="{{ . }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+            {{ end }}
+
+            {{ with .Params.demo }}
+            |
+            <div class="demo-link">
+                <a href="{{ . }}" target="_blank" rel="noopener noreferrer">Demo</a>
+            </div>
+            {{ end }}
+            <!-- links end -->
+          </div>
           {{ .Summary }}
         </p>
       </div>
@@ -69,7 +85,7 @@
 
 <!-- Image Preview Element -->
 <div id="image-preview" style="display: none; position: absolute; z-index: 9999; pointer-events: none;">
-  <img id="preview-image" src="" style="width: 150px; border: 1px solid #ddd; background-color: #fff;" />
+  <img id="preview-image" src="" style="width: 250px; border: 1px solid #ddd; background-color: #fff;" />
 </div>
 
 <script>
