@@ -27,12 +27,23 @@
     {{ template "_internal/google_analytics.html" . }}
 
     {{- partial "header.html" . -}}
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
+          "three/examples/jsm/geometries/TeapotGeometry.js": "https://unpkg.com/three@0.152.2/examples/jsm/geometries/TeapotGeometry.js",
+          "teapot": "/threedee/teapot.js"
+        }
+      }
+    </script>
 </head>
 <body class="terminal">
     <div class="container">
         <div class="terminal-nav">
           <header class="terminal-logo">
-            <div class="logo terminal-prompt">
+            <div class="logo terminal-prompt" style="display: flex; align-items: center;">
+              <a href="{{ .Site.BaseURL }}" style="margin-right: 1em;"><div id="teapot-container"></div></a>
               {{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}
               {{ $.Scratch.Add "path" .Site.BaseURL }}
               <a href="{{ .Site.BaseURL }}" class="no-style {{ with .Site.Params.TitleCutting }}site-name{{ end }}">{{ .Site.Title }}</a>:~# 
@@ -53,4 +64,19 @@
         {{ partial "footer.html" . }}
     </div>
   </body>
+  <!-- Main script to spawn the teapot -->
+  <script type="module">
+    import { spawnTeapot } from "teapot";
+
+    // Get the container and spawn the teapot into it.
+    const container = document.getElementById("teapot-container");
+    spawnTeapot(container, {
+      containerSize: 50,
+      teapotSize: 0.8,
+      tessellation: 10,
+      baseSpeed: 0.01,
+      hoverSpeed: 0.05,
+      cameraZ: 3,
+    });
+  </script>
 </html>
