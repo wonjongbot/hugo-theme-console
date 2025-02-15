@@ -33,6 +33,7 @@
         "imports": {
           "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
           "three/examples/jsm/geometries/TeapotGeometry.js": "https://unpkg.com/three@0.152.2/examples/jsm/geometries/TeapotGeometry.js",
+          "three/examples/jsm/controls/OrbitControls.js": "https://unpkg.com/three@0.152.2/examples/jsm/controls/OrbitControls.js",
           "teapot": "/threedee/teapot.js"
         }
       }
@@ -43,7 +44,7 @@
         <div class="terminal-nav">
           <header class="terminal-logo">
             <div class="logo terminal-prompt" style="display: flex; align-items: center;">
-              <a href="{{ .Site.BaseURL }}" style="margin-right: 4px;"><div id="teapot-container"></div></a>
+              <a style="margin-right: 4px;"><div id="teapot-container"></div></a>
               {{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}
               {{ $.Scratch.Add "path" .Site.BaseURL }}
               <a href="{{ .Site.BaseURL }}" class="no-style {{ with .Site.Params.TitleCutting }}site-name{{ end }}">{{ .Site.Title }}</a>:~# 
@@ -57,7 +58,7 @@
           </nav>
         </div>
     </div>
-
+    <div id="teapot-preview"></div>
     <div class="container {{ .Site.Params.animateStyle }}" >
         {{ block "main" . }}
         {{ end }}
@@ -75,8 +76,42 @@
       teapotSize: 0.8,
       tessellation: 10,
       baseSpeed: 0.01,
-      hoverSpeed: 0.05,
+      hoverSpeed: 0.03,
       cameraZ: 3,
     });
+
+    const previewContainer = document.getElementById("teapot-preview");
+    let previewSceneInstance = null;
+
+    previewSceneInstance = spawnTeapot(previewContainer, {
+          containerSize: 250,
+          teapotSize: 0.8,
+          tessellation: 10,
+          baseSpeed: 0.01,
+          hoverSpeed: 0.03,
+          cameraZ: 3,
+          containerRoot: container
+    });
+
+      // Add event listeners to your links (using the same logic as your image preview)
+      document.addEventListener("DOMContentLoaded", () => {
+        const teapot = document.getElementById("teapot-container")
+        const tp_preview_mover = document.getElementById("teapot-preview-mover")
+
+        teapot.addEventListener("mouseenter", () => {
+          // Show the preview and spawn the teapot scene
+          previewContainer.style.display = "block";
+        });
+
+        teapot.addEventListener("mousemove", e => {
+          // Position the preview container relative to the mouse (with offset)
+          previewContainer.style.top = (e.pageY + 10) + "px";
+          previewContainer.style.left = (e.pageX + 10) + "px";
+        });
+
+        teapot.addEventListener("mouseleave", () => {
+          previewContainer.style.display = "none";
+        });
+      });
   </script>
 </html>
